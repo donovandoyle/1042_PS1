@@ -72,5 +72,35 @@ q4a <- x %>%
   mutate(Distance = as.integer(Distance), Grass = as.integer(Grass)) %>%
   as.data.frame()
 
+q4a %>%
+  summarize(N = n(), r = cor(Distance, Grass)) %>%
+  glimpse()
+
+q4a %>%
+  summarize(N = n(), r = cor(Success, Distance))
+```
+**A)** The correlation between grass and distance is -0.003. This likely means when there's turf, a coach is very slightly more willing to take a kick. **B)** The correlation between success and distance is -0.337. This means the longer a kick, the less likely it is to be made.
+
+# Question 5
+```{r q5, include = FALSE}
+
 ```
 
+# Question 6
+```{r q6, include = FALSE}
+q6 <- x %>%
+  mutate(Success = as.integer(Success), Distance = as.integer(Distance), Grass = as.integer(Grass), ScoreDiff = as.integer(ScoreDiff), GameMinute = as.integer(GameMinute)) %>%
+  as.data.frame() %>%
+  glimpse()
+
+lm(Success ~ Distance + Grass + ScoreDiff + GameMinute, data = q6) %>%
+  summary()
+
+lm(Success ~ Distance + Grass + ScoreDiff + GameMinute + factor(Kicker), data = q6) %>%
+  summary()
+
+lm(Success ~ Distance + Grass + ScoreDiff + GameMinute + factor(Kicker) + factor(Year), data = q6) %>%
+  summary()
+
+```
+**A)** The Game Minute is not statistically significant compared to the success rate, so there seems to be no significant correlation between the two. There is no evidence of "clutch" kicking. **B)** This corrects for skill of the kicker, isolating the effects of the Game Minute on the success rate. The adjusted R-squared is now 0.1205, greater than the old adjusted R-squared of 0.1139. **C)** It seems kickers have been getting better over the years, as 2012-2015 all have positive significant relationships with the make rate. This is in line with most other athletic skills, as kickers get better over time, such as a 4-minute mile supposedly being impossible or the average weight of an offensive lineman increasing over the years.
