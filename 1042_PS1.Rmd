@@ -1,0 +1,17 @@
+---
+title: "Problem Set 1"
+author: "Donovan Doyle"
+date: "1/30/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(readxl)
+library(knitr)
+library(stringr)
+library(kableExtra)
+```
+
