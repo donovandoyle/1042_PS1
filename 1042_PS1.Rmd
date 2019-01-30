@@ -13,5 +13,64 @@ library(readxl)
 library(knitr)
 library(stringr)
 library(kableExtra)
+library(rlm)
+library(dtplyr)
+```
+
+
+```{r read-in, include=FALSE}
+x <- read.csv("kickers.csv")
+glimpse(x)
+head(sort(x$Distance))
+tail(sort(x$Distance))
+mean(x$Distance)
+median((x$Distance))
+```
+# Question 1
+
+**A)** The minimum distance was 18. The maximum was 76, but it missed. The mean was 36.90. The median was 37. 
+**B)** The minimum can't get lower than 18 because for each kick, you must also include the distance of the end zone and the distance between the longsnapper and the holder. The distance of the end zone is 10 yards, and the holder will generally set up 7 yards behind the longsnapper, so any kick, even from the 1 yard line, will be at least 18 yards. The maximum can be explained because it occurred in the 30th minute, meaning right at halftime. The Raiders probabyly thought they had a better chance trying a kick than they did throwing a deep ball to the endzone. 
+
+# Question 2
+```{r q2, include = FALSE}
+q2a <- x %>%
+  filter(Distance >= 40) %>%
+  filter(Distance <= 45) %>%
+  summarize(mean(Success))
+
+q2b <- x %>%
+  filter(Distance > 45) %>%
+  summarize(mean(Success))
+```
+The percentage of kicks made between 40 and 45 yards was 79.2%, while the percentage of kicks made above 45 was 64.4%.
+
+# Question 3
+```{r q3, include=FALSE}
+grass <- x %>%
+  filter(Grass == TRUE) %>%
+  summarize(mean(Success))
+
+turf <- x %>%
+  filter(Grass == FALSE) %>%
+  summarize(mean(Success))
+
+grass_ols <- x %>%
+  mutate(Success = as.integer(Success), Grass = as.integer(Grass)) %>%
+  as.data.frame()
+
+q3a <- lm(Success ~ Grass, data = grass_ols) %>%
+  summary()
+
+q3b <- lm(Success ~ Grass + GameMinute + ScoreDiff + Distance, data = grass_ols) %>%
+  summary()
+```
+The make rate on grass was 82%, while the make rate on turf was slightly higher at 84%. The difference is statistically significant at a 99% level when tested with no control variables. Even with control variables added (I used GameMinute, ScoreDiff, and Distance), the relationship is still statistically significant, but it is much smaller than the 2% in the raw make rates. 2% is not the true effect of surface, but there is an effect.
+
+# Question 4
+```{r q4, include = FALSE}
+q4a <- x %>%
+  mutate(Distance = as.integer(Distance), Grass = as.integer(Grass)) %>%
+  as.data.frame()
+
 ```
 
