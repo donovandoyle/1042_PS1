@@ -99,8 +99,53 @@ lm(Success ~ Distance + Grass + ScoreDiff + GameMinute, data = q6) %>%
 lm(Success ~ Distance + Grass + ScoreDiff + GameMinute + factor(Kicker), data = q6) %>%
   summary()
 
-lm(Success ~ Distance + Grass + ScoreDiff + GameMinute + factor(Kicker) + factor(Year), data = q6) %>%
-  summary()
+lm(Success ~ Distance + Grass + ScoreDiff + GameMinute + factor(Kicker) + factor(Year), data = q6)
 
 ```
 **A)** The Game Minute is not statistically significant compared to the success rate, so there seems to be no significant correlation between the two. There is no evidence of "clutch" kicking. **B)** This corrects for skill of the kicker, isolating the effects of the Game Minute on the success rate. The adjusted R-squared is now 0.1205, greater than the old adjusted R-squared of 0.1139. **C)** It seems kickers have been getting better over the years, as 2012-2015 all have positive significant relationships with the make rate. This is in line with most other athletic skills, as kickers get better over time, such as a 4-minute mile supposedly being impossible or the average weight of an offensive lineman increasing over the years.
+
+# Question 7
+```{r q7, include = FALSE}
+q7 <- lm(Success ~ Grass + ScoreDiff + GameMinute + factor(Kicker) + factor(Year), data = q6)
+q7data <- data.frame(Grass = 0, ScoreDiff = -3, GameMinute = 30, Kicker = "Tucker", Year = 2015)
+
+predict(q7, q7data)
+```
+**A)** There is an 88.87% chance that Tucker makes the field goal, given the conditions. **B)** Yes, this makes sense. I would assume it would be slightly under his average, as the ScoreDiff and GameMinute would skew his make rate down, given that you generally have to take longer chances at GameMinute 30 and in that close of a game, meaning he would have to kick longer field goals in that situation usually.
+
+# Question 8
+```{r q8, include = FALSE}
+
+```
+
+# Question 9
+Clustered standard errors are used when standard errors are correlated to each other in panel data. For example, in our case, a kicker's standard error from one year to the next will be related to each other, because if he is kicking in 2015 after playing in 2014, he likely had a pretty good year in 2015, or at least a good enough year to not be benched. For this reason, I would cluster at the kicker factor level, as that will likely be correlated with each other more than at the year factor level.
+
+# Question 10
+```{r q10, echo = FALSE}
+q10a <- x %>%
+  group_by(Kicker) %>%
+  filter(GameMinute != 30) %>%
+  filter(GameMinute != 60) %>%
+  summarize(prob = sum(Success) / n())
+
+q10b <- x %>%
+  count(Kicker) %>%
+  rename("Kicker" = 'Kicker', "count" = 'n') %>%
+  filter(count > 300)
+
+(q10 <- right_join(q10a, q10b, by = "Kicker") %>%
+  kable(col.names = c("Kicker", "Make Rate", "Kick Count"), digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "hover")))
+```
+I took the kickers with the 9 most kicks in the time period, as volume is important in my opinion, showing that the coach trusts them and they never were beaten out. Of these kickers, Gostkowski has the highest make rate. This provides solid evidence that Gostkowski is the best kicker of the time period, although the numbers are very close. I think Brown would also be a good choice, given his workload, his coaches must trust him.
+
+#Question 11
+I would want 1) weather results, 2) playoff versus regular season results, and 3) blocked kicks/messy snaps and holds vs clean kicks. Controlling for weather results would positively affect the make rates, as bad weather is bad for kicking, playoff results would help see the "clutch" gene better if it exists, and controlling for only clean kicks would positively affect the make rates.
+
+I used this data from Tony Crabtree that has weather by game for another project, which would be helpful if I wanted to dig more: 
+
+https://www.kaggle.com/tobycrabtree/nfl-scores-and-betting-data
+
+
+
