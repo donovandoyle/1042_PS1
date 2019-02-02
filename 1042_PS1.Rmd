@@ -4,6 +4,7 @@ author: "Donovan Doyle"
 date: "1/30/2019"
 output:
   pdf_document: default
+  word_document: default
   html_document: default
 ---
 
