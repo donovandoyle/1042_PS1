@@ -152,5 +152,9 @@ I used this data from Tony Crabtree that has weather by game for another project
 
 https://www.kaggle.com/tobycrabtree/nfl-scores-and-betting-data
 
+All of my work in R is contained here: 
+https://github.com/donovandoyle/1042_PS1
+
+
 
 
