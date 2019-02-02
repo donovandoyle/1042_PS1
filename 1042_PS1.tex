@@ -1,0 +1,239 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Problem Set 1},
+            pdfauthor={Donovan Doyle},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Problem Set 1}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Donovan Doyle}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{1/30/2019}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+
+\begin{document}
+\maketitle
+
+\section{Question 1}\label{question-1}
+
+\textbf{A)} The minimum distance was 18. The maximum was 76, but it
+missed. The mean was 36.90. The median was 37. \textbf{B)} The minimum
+can't get lower than 18 because for each kick, you must also include the
+distance of the end zone and the distance between the longsnapper and
+the holder. The distance of the end zone is 10 yards, and the holder
+will generally set up 7 yards behind the longsnapper, so any kick, even
+from the 1 yard line, will be at least 18 yards. The maximum can be
+explained because it occurred in the 30th minute, meaning right at
+halftime. The Raiders probabyly thought they had a better chance trying
+a kick than they did throwing a deep ball to the endzone.
+
+\section{Question 2}\label{question-2}
+
+The percentage of kicks made between 40 and 45 yards was 79.2\%, while
+the percentage of kicks made above 45 was 64.4\%.
+
+\section{Question 3}\label{question-3}
+
+The make rate on grass was 82\%, while the make rate on turf was
+slightly higher at 84\%. The difference is statistically significant at
+a 99\% level when tested with no control variables. Even with control
+variables added (I used GameMinute, ScoreDiff, and Distance), the
+relationship is still statistically significant, but it is much smaller
+than the 2\% in the raw make rates. 2\% is not the true effect of
+surface, but there is an effect.
+
+\section{Question 4}\label{question-4}
+
+\textbf{A)} The correlation between grass and distance is -0.003. This
+likely means when there's turf, a coach is very slightly more willing to
+take a kick. \textbf{B)} The correlation between success and distance is
+-0.337. This means the longer a kick, the less likely it is to be made.
+
+\section{Question 5}\label{question-5}
+
+\textbf{A)} Covariance of X and Y over the variance of X is the formula
+for OVB. \textbf{B)} Distance is confirmed OVB, as it is independent
+from X (grass) and impacts Y (success).
+
+\section{Question 6}\label{question-6}
+
+\textbf{A)} The Game Minute is not statistically significant compared to
+the success rate, so there seems to be no significant correlation
+between the two. There is no evidence of ``clutch'' kicking. \textbf{B)}
+This corrects for skill of the kicker, isolating the effects of the Game
+Minute on the success rate. The adjusted R-squared is now 0.1205,
+greater than the old adjusted R-squared of 0.1139. \textbf{C)} It seems
+kickers have been getting better over the years, as 2012-2015 all have
+positive significant relationships with the make rate. This is in line
+with most other athletic skills, as kickers get better over time, such
+as a 4-minute mile supposedly being impossible or the average weight of
+an offensive lineman increasing over the years.
+
+\section{Question 7}\label{question-7}
+
+\textbf{A)} There is an 88.87\% chance that Tucker makes the field goal,
+given the conditions. \textbf{B)} Yes, this makes sense. I would assume
+it would be slightly under his average, as the ScoreDiff and GameMinute
+would skew his make rate down, given that you generally have to take
+longer chances at GameMinute 30 and in that close of a game, meaning he
+would have to kick longer field goals in that situation usually.
+
+\section{Question 8}\label{question-8}
+
+\textbf{A)} I got 88.87\% chance again. \textbf{B)} I think this may be
+because R auto-runs a probablistic when the dependent variable is
+between 0 to 1. \# Question 9 Clustered standard errors are used when
+standard errors are correlated to each other in panel data. For example,
+in our case, a kicker's standard error from one year to the next will be
+related to each other, because if he is kicking in 2015 after playing in
+2014, he likely had a pretty good year in 2015, or at least a good
+enough year to not be benched. For this reason, I would cluster at the
+kicker factor level, as that will likely be correlated with each other
+more than at the year factor level.
+
+\section{Question 10}\label{question-10}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l|r|r}
+\hline
+Kicker & Make Rate & Kick Count\\
+\hline
+Akers & 0.81 & 336\\
+\hline
+Brown & 0.84 & 488\\
+\hline
+Bryant & 0.87 & 308\\
+\hline
+Crosby & 0.83 & 321\\
+\hline
+Dawson & 0.88 & 332\\
+\hline
+Gostkowski & 0.89 & 342\\
+\hline
+Gould & 0.85 & 329\\
+\hline
+Janikowski & 0.82 & 334\\
+\hline
+Vinatieri & 0.87 & 339\\
+\hline
+\end{tabular}
+\end{table}
+
+I took the kickers with the 9 most kicks in the time period, as volume
+is important in my opinion, showing that the coach trusts them and they
+never were beaten out. Of these kickers, Gostkowski has the highest make
+rate. This provides solid evidence that Gostkowski is the best kicker of
+the time period, although the numbers are very close. I think Brown
+would also be a good choice, given his workload, his coaches must trust
+him. In the regression that includes clustering kickers, which contains
+controls for all of our quantifiable variables, Tucker and Vinatieri
+have the strongest relationship between their kicking and success.
+
+\section{Question 11}\label{question-11}
+
+I would want 1) weather results, 2) playoff versus regular season
+results, and 3) blocked kicks/messy snaps and holds vs clean kicks.
+Controlling for weather results would positively affect the make rates,
+as bad weather is bad for kicking, playoff results would help see the
+``clutch'' gene better if it exists, and controlling for only clean
+kicks would positively affect the make rates.
+
+I used this data from Tony Crabtree that has weather by game for another
+project, which would be helpful if I wanted to dig more:
+
+\url{https://www.kaggle.com/tobycrabtree/nfl-scores-and-betting-data}
+
+All of my work in R is contained here:
+\url{https://github.com/donovandoyle/1042_PS1}
+
+
+\end{document}
